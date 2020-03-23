@@ -8,7 +8,7 @@ public class HashServiceTest {
 
     @Test
     public void generateHash() {
-        String url = "https://github.com/wangzheng0822/ratelimiter4j";
+        String url = "https://yefan813.github.io/";
         long hash = MurmurHash3.hash32x86(url.getBytes());
         System.out.println(hash);
         System.out.println(MathUtils._10_to_62(hash));
