@@ -1,14 +1,15 @@
 # 实现一个短连接服务
 
 
-| 所用技术     | 功能           | 完成度 |
-|:------------|:--------------|:------|
-| Spring Boot | 框架           | 已完成 |
-| MySQL       | 数据存储       | 已完成 |
-| Redis       | 二级缓存       | X      |
-| OpenResty   | 代理 + 一级缓存 | X     |
-| EhCache     | 三级缓存       | 已完成      |
-| Zookeeper   | 分布式锁       | X      |
+| 所用技术     | 功能            | 完成度 |
+|:------------|:---------------|:------|
+| Spring Boot | 框架            | 已完成 |
+| MySQL       | 数据存储        | 已完成 |
+| Redis       | 二级缓存        | X      |
+| OpenResty   | 代理 + 一级缓存  | X     |
+| EhCache     | 三级缓存        | 已完成 |
+| Zookeeper   | 分布式锁        | X      |
+| 布隆过滤器   | 判断hash是否存在 | X      |
 
 [代码地址](https://github.com/yefan813/short-url.git)
 
