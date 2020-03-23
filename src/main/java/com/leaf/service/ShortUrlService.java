@@ -19,8 +19,20 @@ public interface ShortUrlService {
     int saveShortUrl(ShortUrl shortUrl);
 
 
+    /**
+     * 从数据库查询
+     * @param hashValue
+     * @return
+     */
+    ShortUrl findByHashValueFromDB(String hashValue);
 
-    ShortUrl findByHashValue(String hashValue);
+
+    /**
+     * 从本地缓存查询
+     * @param hashValue
+     * @return
+     */
+    ShortUrl findByHashValueFromLocalCache(String hashValue);
 
 
 }

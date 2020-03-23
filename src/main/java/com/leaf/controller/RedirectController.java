@@ -24,7 +24,7 @@ public class RedirectController {
     @Autowired
     private ShortUrlManager shortUrlManager;
 
-    @GetMapping(value = "/{hash}")
+    @GetMapping(value = "/r/{hash}")
     public String redirect(HttpServletRequest request, HttpServletResponse response, @PathVariable("hash") String hash) throws IOException {
         log.info("====================请求地址:[{}]===============" , request.getRequestURL());
         ShortUrlVO shortUrlVO = shortUrlManager.getRealUrlByHash(hash);

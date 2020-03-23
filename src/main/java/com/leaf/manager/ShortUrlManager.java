@@ -37,7 +37,7 @@ public class ShortUrlManager {
         if(StringUtils.isBlank(url)){
             throw new RuntimeException("参数错误");
         }
-        url = StringUtils.trim(url);
+        url = StringUtils.trim(url).toLowerCase();
         if(!isStartWithHttpOrHttps(url)){
             url = appendHttp2Head(url,URL_PREFIX);
         }
@@ -50,7 +50,7 @@ public class ShortUrlManager {
             if(count > 5){
                 throw new RuntimeException("重试拼接url 超过限制次数");
             }
-            ShortUrl dbShortUrl = shortUrlService.findByHashValue(hash);
+            ShortUrl dbShortUrl = shortUrlService.findByHashValueFromLocalCache(hash);
             if(null == dbShortUrl){
                 log.info("============生成短链接，判断短链接不存在,可以生成对应关系!===============");
                 break;
@@ -81,7 +81,7 @@ public class ShortUrlManager {
 
     public ShortUrlVO getRealUrlByHash(String hash) {
         //get Url by hash
-        ShortUrl shortUrl = shortUrlService.findByHashValue(hash);
+        ShortUrl shortUrl = shortUrlService.findByHashValueFromLocalCache(hash);
         if(null == shortUrl){
             return null;
         }

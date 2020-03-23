@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.MurmurHash3;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -32,7 +33,14 @@ public class ShortUrlServiceImpl implements ShortUrlService {
     }
 
     @Override
-    public ShortUrl findByHashValue(String hashValue) {
+    public ShortUrl findByHashValueFromDB(String hashValue) {
+        return shortUrlMapper.findByHashValue(hashValue);
+    }
+
+    @Override
+    @Cacheable(cacheNames = "shortUrl", key= "#hashValue")
+    public ShortUrl findByHashValueFromLocalCache(String hashValue) {
+        log.info("==================从本地缓存中读取数据:[{}]==================", hashValue);
         return shortUrlMapper.findByHashValue(hashValue);
     }
 }
