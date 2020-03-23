@@ -28,7 +28,7 @@
 我们可以看到请求的http状态码是 302（重定向） 和 Location值具体跳转目标地址，浏览器拿到了得到这个长链接，发起重定向请求到目标地址
 
 整体交互流程如下
-![](http://test-pic-yefan.oss-cn-beijing.aliyuncs.com/2020-03-23-031220.png)
+![](http://test-pic-yefan.oss-cn-beijing.aliyuncs.com/2020-03-23-103324.png)
 
 这里有个问题http状态码, 301和302 有什么区别
 
@@ -85,4 +85,6 @@ TODO
 ## 阶段二：实现一个高性能的短链接服务器
 1. 支持大并发访问生成短链接
 
+
+[代码地址](https://github.com/yefan813/short-url.git)
 
