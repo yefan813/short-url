@@ -24,7 +24,7 @@
 
 ## 短链跳转的原理
  我们可以从这些短链接请求看下原理
-![](https://mmbiz.qpic.cn/mmbiz_png/OyweysCSeLUfZAfjEBvhtLG8agdgGG77LicYycKDexOfHHY441CiaXr5Zytp9gtZaibSRboK0RvKnXcrUrnFKPaGQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![](http://test-pic-yefan.oss-cn-beijing.aliyuncs.com/2020-03-23-103507.png)
 我们可以看到请求的http状态码是 302（重定向） 和 Location值具体跳转目标地址，浏览器拿到了得到这个长链接，发起重定向请求到目标地址
 
 整体交互流程如下
