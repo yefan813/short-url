@@ -5,6 +5,7 @@ import com.leaf.response.Response;
 import com.leaf.response.ShortUrlVO;
 import com.leaf.service.ShortUrlService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,10 @@ public class ShortUrlManager {
     @Transactional(rollbackFor = Exception.class)
     public Response<String> generateShortUrl(String url) {
         //判断 url 是否是Http https 开头
+        if(StringUtils.isBlank(url)){
+            throw new RuntimeException("参数错误");
+        }
+        url = StringUtils.trim(url);
         if(!isStartWithHttpOrHttps(url)){
             url = appendHttp2Head(url,URL_PREFIX);
         }
@@ -47,7 +52,7 @@ public class ShortUrlManager {
             }
             ShortUrl dbShortUrl = shortUrlService.findByHashValue(hash);
             if(null == dbShortUrl){
-                log.info("============短链接不存在!===============");
+                log.info("============生成短链接，判断短链接不存在,可以生成对应关系!===============");
                 break;
             }
             //hash 相同且长链接相同
@@ -84,8 +89,8 @@ public class ShortUrlManager {
         return new ShortUrlVO(shortUrl.getHashValue(), realUrl);
     }
 
-    private boolean isStartWithHttpOrHttps(String url) {
-        String regex = "String regex = \"^((https|http|ftp|rtsp|mms)?://)\" ";
+    public static boolean isStartWithHttpOrHttps(String url) {
+       String regex = "^((https|http)?://)";
         Pattern p = Pattern.compile(regex);
         Matcher matcher = p.matcher(url);
         return matcher.find();
@@ -112,9 +117,11 @@ public class ShortUrlManager {
         boolean isurl = false;
         String regex = "(((https|http)?://)?([a-z0-9]+[.])|(www.))"
                 + "\\w+[.|\\/]([a-z0-9]{0,})?[[.]([a-z0-9]{0,})]+((/[\\S&&[^,;\u4E00-\u9FA5]]+)+)?([.][a-z0-9]{0,}+|/?)";//设置正则表达式
-        Pattern pat = Pattern.compile(regex.trim());//对比
+        //对比
+        Pattern pat = Pattern.compile(regex.trim());
         Matcher mat = pat.matcher(urls.trim());
-        isurl = mat.matches();//判断是否匹配
+        //判断是否匹配
+        isurl = mat.matches();
         if (isurl) {
             isurl = true;
         }
