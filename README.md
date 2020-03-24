@@ -50,7 +50,7 @@
 
 
 ## 短链接生成的几种方式
-![](https://mmbiz.qpic.cn/mmbiz_png/OyweysCSeLUfZAfjEBvhtLG8agdgGG77YI1YKHq1WXqCbAfOTOjp0ESKRiabmSByVJgEgJRrkoJHhg7TeX48NWw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![](http://test-pic-yefan.oss-cn-beijing.aliyuncs.com/2020-03-24-062346.png)
 通过观察发现上面提到的短链接能发现，它是由固定的短链接域名 + 长链接映射成的一串字母组成，那么长链接怎么才能映射成一串字母呢？
 
 ### 哈希算法
@@ -70,7 +70,7 @@
   不过，你可能已经看出来了，通过 MurmurHash 算法得到的短网址还是很长啊，而且跟我们开头那个网址的格式好像也不一样。别着急，我们只需要稍微改变一个哈希值的表示方法，就可以轻松把短网址变得更短些。
 
   我们可以将 10 进制的哈希值，转化成更高进制的哈希值，这样哈希值就变短了。我们知道，16 进制中，我们用 A～E，来表示 10～15。在网址 URL 中，常用的合法字符有 0～9、a～z、A～Z 这样 62 个字符。为了让哈希值表示起来尽可能短，我们可以将 10 进制的哈希值转化成 62 进制。具体的计算过程，我写在这里了。最终用 62 进制表示的短网址就是
-  ![](https://static001.geekbang.org/resource/image/15/f8/15e486a7db8d56a7b1c5ecf873b477f8.jpg)
+  ![](http://test-pic-yefan.oss-cn-beijing.aliyuncs.com/2020-03-24-062239.png)
 
 ### 2.如何解决哈希冲突
   解决思路，根据长链接生成hash字符串，然后去查找数据库会出现以下几种情况
