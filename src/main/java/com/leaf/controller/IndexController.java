@@ -3,13 +3,11 @@ package com.leaf.controller;
 import com.leaf.manager.ShortUrlManager;
 import com.leaf.request.GenerateShortUrlRequest;
 import com.leaf.response.Response;
+import com.leaf.response.ShortUrlVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -34,6 +32,20 @@ public class IndexController {
         }
         return shortUrlManager.generateShortUrl(request.getUrl());
     }
+
+    @GetMapping("/getByHash/{hashValue}")
+    @ResponseBody
+    public Response<String> getByHash(@PathVariable("hashValue") String hash) {
+        log.info("====================请求hash:[{}]===============" , hash);
+        ShortUrlVO shortUrlVO = shortUrlManager.getRealUrlByHash(hash);
+        if(null == shortUrlVO){
+            log.error("短链接不存在,hash[{}]", hash);
+            return Response.failed("-1", "短链接不存在");
+        }
+        return Response.success(shortUrlVO.getUrl());
+    }
+
+
 
 
 }
