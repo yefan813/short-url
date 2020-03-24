@@ -9,7 +9,7 @@
 | OpenResty   | 代理 + 一级缓存  | X     |
 | EhCache     | 三级缓存        | 已完成 |
 | Zookeeper   | 分布式锁        | X      |
-| 布隆过滤器   | 判断hash是否存在 | X      |
+| 布隆过滤器   | 判断hash是否存在 | 已完成 |
 
 [代码地址](https://github.com/yefan813/short-url.git)
 
