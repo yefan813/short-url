@@ -45,10 +45,12 @@ public class ShortUrlManager {
         if(!isStartWithHttpOrHttps(url)){
             url = appendHttp2Head(url,URL_PREFIX);
         }
+
+        //这里多台机器可能出现并发问题，查询->插入，可能会出现问题，但是有数据库唯一索引保护
         String hash = shortUrlService.generateShortUrl(url);
         //计算多差次拼接才能生成不重复的 hash value
         int count = 0;
-        //TODO 这里多台机器可能出现并发问题，可以使用分布式锁解决
+
 
         while(true){
             if(count > 5){
@@ -77,11 +79,16 @@ public class ShortUrlManager {
             log.info("===========================url重复拼接字符串，次数:[{}]",count);
         }
 
-        //入库
-        ShortUrl saveBean = new ShortUrl();
-        saveBean.setHashValue(hash);
-        saveBean.setUrl(url);
-        shortUrlService.saveShortUrl(saveBean);
+        try {
+            //入库
+            ShortUrl saveBean = new ShortUrl();
+            saveBean.setHashValue(hash);
+            saveBean.setUrl(url);
+            shortUrlService.saveShortUrl(saveBean);
+        } catch (Exception e) {
+            log.error("重复插入问题e:",e);
+            return Response.failed("-1","请重试!");
+        }
         return Response.success(DOMAIN + hash);
     }
 
