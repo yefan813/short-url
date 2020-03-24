@@ -11,7 +11,7 @@
  Target Server Version : 50720
  File Encoding         : utf-8
 
- Date: 03/23/2020 19:40:05 PM
+ Date: 03/24/2020 17:35:46 PM
 */
 
 SET NAMES utf8mb4;
@@ -29,7 +29,7 @@ CREATE TABLE `tb_short_url` (
   `updated` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
   `yn` tinyint(2) DEFAULT '0' COMMENT '是否删除 1 删除 0 未删除',
   PRIMARY KEY (`id`),
-  KEY `unique` (`hash_value`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+  UNIQUE KEY `unique` (`hash_value`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=325781 DEFAULT CHARSET=utf8;
 
 SET FOREIGN_KEY_CHECKS = 1;
