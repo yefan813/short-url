@@ -6,7 +6,7 @@
 | Spring Boot | 框架            | 已完成 |
 | MySQL       | 数据存储        | 已完成 |
 | Redis       | 二级缓存        | X      |
-| OpenResty   | 代理 + 一级缓存  | X     |
+| OpenResty   | 代理 + 一级缓存  | 已完成 |
 | EhCache     | 三级缓存        | 已完成 |
 | Zookeeper   | 分布式锁        | X      |
 | 布隆过滤器   | 判断hash是否存在 | 已完成 |
