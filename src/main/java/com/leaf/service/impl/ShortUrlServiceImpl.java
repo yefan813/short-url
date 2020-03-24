@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class ShortUrlServiceImpl implements ShortUrlService {
@@ -42,6 +44,11 @@ public class ShortUrlServiceImpl implements ShortUrlService {
     public ShortUrl findByHashValueFromLocalCache(String hashValue) {
         log.info("==================从本地缓存中读取数据:[{}]==================", hashValue);
         return shortUrlMapper.findByHashValue(hashValue);
+    }
+
+    @Override
+    public List<String> findAllHashValue() {
+        return shortUrlMapper.findAllHashValue();
     }
 }
 

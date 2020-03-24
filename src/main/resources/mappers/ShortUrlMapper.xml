@@ -23,7 +23,11 @@
     select
     <include refid="Base_Column_List"/>
     from tb_short_url
-    where hash_value=#{hashValue,jdbcType=VARCHAR}
+    where hash_value=#{hashValue,jdbcType=VARCHAR} and yn = 0;
+  </select>
+
+  <select id="findAllHashValue" resultType="java.lang.String">
+    select hash_value from tb_short_url where yn = 0;
   </select>
 
 

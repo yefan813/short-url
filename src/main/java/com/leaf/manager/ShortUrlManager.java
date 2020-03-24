@@ -1,6 +1,7 @@
 package com.leaf.manager;
 
 import com.leaf.domain.ShortUrl;
+import com.leaf.filter.ShortUrlBloomFilter;
 import com.leaf.response.Response;
 import com.leaf.response.ShortUrlVO;
 import com.leaf.service.ShortUrlService;
@@ -31,6 +32,9 @@ public class ShortUrlManager {
     @Value("${domain}")
     private String DOMAIN;
 
+    @Autowired
+    private ShortUrlBloomFilter shortUrlBloomFilter;
+
     @Transactional(rollbackFor = Exception.class)
     public Response<String> generateShortUrl(String url) {
         //判断 url 是否是Http https 开头
@@ -50,12 +54,15 @@ public class ShortUrlManager {
             if(count > 5){
                 throw new RuntimeException("重试拼接url 超过限制次数");
             }
-            ShortUrl dbShortUrl = shortUrlService.findByHashValueFromLocalCache(hash);
-            if(null == dbShortUrl){
+            //从 BloomFilter 查看是否存在
+            boolean mightContain = shortUrlBloomFilter.mightContain(hash);
+            if(!mightContain){
                 log.info("============生成短链接，判断短链接不存在,可以生成对应关系!===============");
                 break;
             }
+
             //hash 相同且长链接相同
+            ShortUrl dbShortUrl = shortUrlService.findByHashValueFromLocalCache(hash);
             if(dbShortUrl.getUrl().equals(url)){
                 log.info("============短链接已存在!===============");
                 return Response.success(DOMAIN + hash);

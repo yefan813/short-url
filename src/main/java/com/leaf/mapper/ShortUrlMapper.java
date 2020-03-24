@@ -9,4 +9,6 @@ public interface ShortUrlMapper extends BaseMapper<ShortUrl> {
 
     ShortUrl findByHashValue(@Param("hashValue")String hashValue);
 
+    List<String> findAllHashValue();
+
 }

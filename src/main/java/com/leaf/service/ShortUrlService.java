@@ -2,6 +2,8 @@ package com.leaf.service;
 
 import com.leaf.domain.ShortUrl;
 
+import java.util.List;
+
 public interface ShortUrlService {
     /**
      * 将长链接生成短链接
@@ -33,6 +35,12 @@ public interface ShortUrlService {
      * @return
      */
     ShortUrl findByHashValueFromLocalCache(String hashValue);
+
+    /**
+     * 查询DB所有的HashValue
+     * @return
+     */
+    List<String> findAllHashValue();
 
 
 }
