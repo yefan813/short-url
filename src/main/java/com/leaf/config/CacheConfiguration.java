@@ -10,7 +10,7 @@ import org.springframework.core.io.ClassPathResource;
 /**
  * 缓存配置管理类
  *
- * @author Administrator
+ * @author yefan
  */
 @Configuration
 @EnableCaching
